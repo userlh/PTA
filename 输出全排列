@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int n;
+    int a[10];
+    cin>>n;
+    int i,j;
+    for(i=0;i<n;i++)
+        a[i] = i+1;
+    do{
+        for(j=0;j<n;j++){
+            cout<<a[j];
+        }
+        cout<<endl;
+
+    }while(next_permutation(a,a+n));
+    return 0;
+}
