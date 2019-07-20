@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string a;
+    getline(cin,a);
+    int n,len;
+    cin>>n;
+    len = a.size();
+    char temp;
+    if(n > len)
+        n = n%len;
+    for(int i = n; i <len;i++)
+        cout<<a[i];
+    for(int i = 0; i < n;i++)
+        cout<<a[i];
+    return 0;
+}
