@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+map<ll,int> countMap;
+vector<ll> Max;
+int N;
+ll num1,num2;
+int main(){
+    cin>>N;
+    for(int i = 0;i < N; i++){
+        cin>>num1>>num2;
+        countMap[num1]++;
+        countMap[num2]++;
+    }
+    int maxtimes = 0;
+
+    for(map<ll,int>::iterator it = countMap.begin(); it != countMap.end();it++){
+        if(it->second > maxtimes){
+            maxtimes = it->second;
+        }
+    }
+    for(map<ll,int>::iterator it = countMap.begin(); it != countMap.end();it++){
+        if(it->second == maxtimes){
+            Max.push_back(it->first);
+        }
+    }
+    if(Max.size() == 1){
+        printf("%lld %d\n",Max[0],maxtimes);
+    }else{
+        printf("%lld %d %d\n",Max[0],maxtimes,Max.size());
+    }
+    return 0;
+}
