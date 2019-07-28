@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+map<string,int> mmp,p;
+set<string> people;
+int main(){
+    int n;
+    string s[5001];
+    cin>>n;
+    for(int i = 0; i < n;i++){
+        cin>>s[i];
+        p[s[i]] = 1;
+    }
+    getchar();
+    int m;
+    cin>>m;
+    string str;
+    int num;
+    for(int i = 0;i < m;i++){
+        cin>>str>>num;
+        mmp[str] = num;
+    }
+    int sum= 0;
+    for(map<string,int>::iterator it = mmp.begin();it != mmp.end();it++){
+        sum += it->second;
+    }
+    sum = sum/m;
+    for(map<string,int>::iterator it = mmp.begin();it != mmp.end();it++){
+        if(p[it->first] ==0 && it->second > sum)
+            people.insert(it->first);
+    }
+    if(people.size() == 0){
+        cout<<"Bing Mei You";
+    }else{
+        for(set<string>::iterator it = people.begin(); it != people.end();it++){
+            cout<<*it<<endl;
+        }
+    }
+
+    return 0;
+}
