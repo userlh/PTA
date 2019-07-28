@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+stack<int> s1,s2;
+int n1,n2,a;
+char c;
+
+int main(){
+    cin>>n1>>n2;
+    if(n1 > n2)
+        swap(n1,n2);
+    while(1){
+        cin>>c;
+        if(c == 'T')
+            return 0;
+        if(c == 'A'){
+            cin>>a;
+            if((s1.size() == n1) && (s2.size() != 0)){
+                cout<<"ERROR:Full"<<endl;
+            }
+            else{
+                int len1,t;
+                if(s1.size() == n1){
+                    len1 = s1.size();
+                    while(len1--){
+                        t = s1.top();
+                        s1.pop();
+                        s2.push(t);
+                    }
+                    s1.push(a);
+                }
+                else if(s1.size() != n1)
+                    s1.push(a);
+            }
+        }
+        else if(c == 'D'){
+            if((s1.size() == 0) &&( s2.size() == 0))
+                cout<<"ERROR:Empty"<<endl;
+            else{
+                 int len1,t;
+                if(s2.size() == 0){
+                    len1 = s1.size();
+                    while(len1--){
+                        t = s1.top();
+                        s1.pop();
+                        s2.push(t);
+                    }
+                    cout<<s2.top()<<endl;
+                    s2.pop();
+                }else if(s2.size() != 0){
+                    cout<<s2.top()<<endl;
+                    s2.pop();
+                }
+            }
+        }
+    }
+    return 0;
+}
