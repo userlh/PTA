@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+int mp[15][15] = {0};
+bool vis[15];
+
+void dfs(int n,int v){
+    for(int i = 0;i < v;i++){
+        if(!vis[i] && mp[n][i]){
+            vis[i] = true;
+            cout<<i<<" ";
+            dfs(i,v);
+        }
+    }
+    return;
+}
+void bfs(int n,int v){
+    queue<int> q;
+    vis[n] = true;
+    q.push(n);
+    while(!q.empty()){
+        int p = q.front();
+        q.pop();
+        for(int i = 0; i < v;i++){
+            if(!vis[i] && mp[p][i]){
+                cout<<i<<" ";
+                vis[i] = true;
+                q.push(i);
+            }
+        }
+    }
+    return;
+}
+int main(){
+    std::ios::sync_with_stdio(false);
+    int n,e,a,b;
+    cin>>n>>e;
+    for(int i = 0; i < e;i++){
+        cin>>a>>b;
+        mp[a][b]= mp[b][a] = 1;
+    }
+    memset(vis,false,sizeof(vis));
+    for(int i = 0;i < n;i++){
+        if(!vis[i]){
+            vis[i] = true;
+            cout<<"{ "<<i<<" ";
+            dfs(i,n);
+            cout<<"}"<<endl;
+        }
+    }
+    memset(vis,false,sizeof(vis));
+    for(int i = 0; i < n;i++){
+        if(!vis[i]){
+            vis[i] = true;
+            cout<<"{ "<<i<<" ";
+            bfs(i,n);
+            cout<<"}"<<endl;
+        }
+    }
+    return 0;
+}
