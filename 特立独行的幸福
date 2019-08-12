@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+int isPrime(int x){
+    for(int i = 2;i <= sqrt(x);i++){
+        if(x%i == 0)
+            return 1;
+    }
+    return 2;
+}
+int main(){
+    int left,right;
+    map<int,int> link;
+    cin>>left>>right;
+    int t,sum,flag = 0;
+    int appear[10010] = {0};
+    for(int i = left; i <= right;i++){
+        t = i;
+        vector<int> road;
+        while(t!= 1){
+            sum = 0;
+            do
+                sum += pow(t%10,2);
+            while(t /= 10);
+            t = sum;
+            if(find(road.begin(),road.end(),sum) != road.end())
+                break;
+            road.push_back(sum);
+            appear[t] = 1;
+        }
+        if(t == 1)
+            link[i] = road.size();
+    }
+    map<int,int>::iterator it;
+    for(it = link.begin() ;it != link.end();it++)
+        if(!appear[it->first] && ++flag)
+            cout<<it->first<<" "<<isPrime(it->first) * it->second<<endl;
+    if(!flag)
+        cout<<"SAD"<<endl;
+
+
+    return 0;
+}
