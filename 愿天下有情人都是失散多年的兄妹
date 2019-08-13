@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+#include <string>
+using namespace std;
+
+struct person{
+    char sex;
+    int fid;
+    int mid;
+};
+int flag,vis[100001];
+person p[100001];
+void cha(int a,int sum){
+    if(sum > 5 || a == -1 || a == 0){
+        return;
+    }
+    vis[a]++;
+    if(vis[a] >= 2)
+        flag = 0;
+    cha(p[a].fid,sum +1);
+    cha(p[a].mid,sum +1);
+    return;
+}
+
+int main(){
+    cin.sync_with_stdio(false);
+    int n,id,fid,mid;
+    char c;
+    cin>>n;
+    for(int i = 0;i < n;i++){
+        cin>>id>>c>>fid>>mid;
+        p[id].sex = c;
+        p[id].fid = fid;
+        p[id].mid = mid;
+        p[fid].sex = 'M';
+        p[mid].sex = 'F';
+    }
+    int k,a,b;
+    cin>>k;
+    while(k--){
+        flag = 1;
+        memset(vis,0,sizeof(vis));
+        cin>>a>>b;
+        if(p[a].sex == p[b].sex){
+            cout<<"Never Mind"<<endl;
+            continue;
+        }
+        cha(a,1);
+        cha(b,1);
+        if(flag){
+            cout<<"Yes"<<endl;
+        }else{
+            cout<<"No"<<endl;
+        }
+
+    }
+    return 0;
+}
